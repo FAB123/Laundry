@@ -1,0 +1,4 @@
+Barcode,Item Name,Category,Supplier ID,Cost Price,Minimum Price,Unit Price,Tax 1 Name,Tax 1 Percent,Tax 2 Name ,Tax 2 Percent,Reorder Level,Description,Allow Alt Description,Item has Serial Number,item_image,location_id,quantity
+0,Apple iMac,Computers,,800,1100,1200,VAT,5,Tax 2,,1,Best Computer ever,y,,,1,5
+1111,Alfa,Network,,25,40,50,VAT,5,,,1,Best Computer ever,,,,1,5
+2222,Luxery,Network,,35,45,60,VAT,5,,,1,Best Computer ever,,,,1,5

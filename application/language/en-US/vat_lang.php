@@ -1,0 +1,24 @@
+<?php 
+$lang["vat_form"] = "VAT Return Form";
+$lang["vat_item_company"] = "Company Name";
+$lang["vat_item_number"] = "VAT Account Number";
+$lang["vat_period"] = "Tax Return Period";
+$lang["vat_company_address"] = "Address";
+$lang["vat_on_sale"] = "VAT on Sale";
+$lang["vat_total_amount"] = "Amount (SAR)";
+$lang["vat_adjustment"] = "Adjustment";
+$lang["vat_amount"] = "VAT Amount";
+$lang["st_rated_sale"] = "1. Standard Rated Sales";
+$lang["sale_to_gcc"] = "2. Sales to Customers in VAT implementing GCC Contries";
+$lang["zero_rated_sale"] = "3. Zero Rated Domestic Sale";
+$lang["vat_export"] = "4. Exports";
+$lang["exempt_sales"] = "5. Exempt Sales";
+$lang["total_sales"] = "6. Total Sales";
+$lang["vat_on_purchase"] = "VAT on Purchases";
+$lang["vat_st_purchase"] = "7. Standard Rated Domestic Purchases";
+$lang["vat_import_cust"] = "8. Import Subject to Vat Paid at Customs";
+$lang["vat_import_vat"] = "9. Import Subject to Vat for through Reverse Charge";
+$lang["vat_zero_purchases"] = "10. Zero Rated Domestic Purchases";
+$lang["vat_exempt_purchase"] = "11. Exempt Purchases";
+$lang["total_purchase"] = "12. Total Purchases";
+$lang["vat_total_due"] = "13. Total VAT Due for Current Period:";

@@ -1,0 +1,27 @@
+<?php 
+$lang["attributes_confirm_delete"] = "هل أنت متأكد من أنك تريد حذف الميزات المحددة ؟";
+$lang["attributes_definition_cannot_be_deleted"] = "لا يمكن حذف السمات المحددة";
+$lang["attributes_definition_flags"] = "رؤية الميزات";
+$lang["attributes_definition_group"] = "المجموعة";
+$lang["attributes_definition_id"] = "كود";
+$lang["attributes_definition_name"] = "اسم نعت";
+$lang["attributes_definition_one_or_multiple"] = "";
+$lang["attributes_definition_successful_adding"] = "لقد تم إضافة صنف بنجاح";
+$lang["attributes_definition_successful_deleted"] = "لقد تم حذف ميزة بنجاح";
+$lang["attributes_definition_successful_updating"] = "لقد قمت بتحديث نعت بنجاح";
+$lang["attributes_definition_type"] = "نوع نعت";
+$lang["attributes_definition_values"] = "القيم نعت";
+$lang["attributes_new"] = "إضافة ميزة";
+$lang["attributes_no_attributes_to_display"] = "لا توجد عناصر لعرضها";
+$lang["attributes_receipt_visibility"] = "";
+$lang["attributes_show_in_items"] = "";
+$lang["attributes_show_in_items_visibility"] = "بند";
+$lang["attributes_show_in_receipt"] = "";
+$lang["attributes_show_in_receivings"] = "";
+$lang["attributes_show_in_receivings_visibility"] = "شراء";
+$lang["attributes_show_in_sales"] = "";
+$lang["attributes_show_in_sales_visibility"] = "مبيعات";
+$lang["attributes_update"] = "تحديث نعت";
+$lang["attributes_definition_name_required"] = "اسم الميزة هي خانة اجبارية";
+$lang["attributes_definition_type_required"] = "Attribute type is a required field";
+$lang["attributes_attribute_value_invalid_chars"] = "الميزات لا يمكن أن تحتوي على ':' أو'|'";

@@ -1,0 +1,76 @@
+<?php 
+$lang["account_load"] = "اختيار الحسابات";
+$lang["account_customer"] = "زبون";
+$lang["account_supplier"] = "المورد";
+$lang["account_name"] = "الحساب";
+$lang["account_sale_amount"] = "حجم المبيعات";
+$lang["account_payment_amount"] = "دفع";
+$lang["account_balance_amount"] = "مقدار وسطي";
+$lang["accounts_new"] = "مقدار الأجر";
+$lang["accounts_employee"] = "عامل";
+$lang["account_amount"] = "مبلغ";
+$lang["account_time"] = "وقت";
+$lang["account_description"] = "وصف";
+$lang["account_information"] = "الحساب";
+$lang["account_type"] = "نوع";
+$lang["account_credits"] = "ائتمان";
+$lang["account_debits"] = "مدين";
+$lang["accounts_notes"] = "مسودة";
+
+$lang["account_basic_information"] = "Information";
+$lang["account_cannot_be_deleted"] = "يتعذر حذف الحساب (الحسابات) المحدد ، أو أن واحدًا أو أكثر من عملياته قد عالج المبيعات أو إذا كنت تحاول حذف حسابك.";
+$lang["account_confirm_delete"] = "هل أنت متأكد من أنك تريد حذف الحساب (الحسابات) المحدد؟";
+$lang["account_description"] = "وصف";
+
+$lang["accounts_no_accounts_to_display"] = "لا يوجد حساب لعرضه";
+$lang["accounts_is_paid"] = "دفع";
+$lang["accounts_not_paid"] = "غير المدفوعة";
+$lang["account_profit"] = "مكسب";
+$lang["account_cashflow"] = "Cash Flow";
+$lang["account_cashflow_tranfer"] = "Cash Flow & Transfer Fund";
+$lang["account_transfer_amount"] = "تحويل لحساب";
+$lang["transfer_from"] = "تحويل من";
+$lang["transfer_to"] = "حول إلى";
+
+$lang["account_confirm_restore"] = "Are you sure you want to restore selected account(s)?";
+$lang["account_add_item"] = "إضافة حسابات";
+$lang["account_type"] = "نوع";
+$lang["account_income"] = "الإيرادات";
+$lang["account_salery"] = "راتب";
+$lang["account_rent"] = "تأجير";
+$lang["accounts_print_receipt"] = "اطبع الايصال";
+$lang["accounts_print_payment"] = "طباعة الدفع";
+$lang["accounts_update"] = "تحديث";
+$lang["account_transfer_amount"] = "تحويل لحساب";
+$lang["transfer_from"] = "تحويل من";
+$lang["transfer_to"] = "حول إلى";
+$lang["account_cashflow"] = "تدفق مالي";
+$lang["account_cashflow_tranfer"] = "صندوق التدفقات النقدية والتحويلات";
+$lang["account_tarnsfer_location_notequal"] = "نقل الموقع هي نفسها";
+$lang["accounts_editing_history"] = "تحرير التاريخ";
+
+$lang["cashflow_successful_adding"] = "التدفق النقدي إضافة ناجحة";
+$lang["cashflow_successful_updating"] = "التدفق النقدي حذف بنجاح";
+$lang["cashflow_error_adding_updating"] = "خطأ في تحديث التدفق النقدي";
+$lang["transfer_fund_successful_updating"] = "تم تحديث تحويل الأموال بنجاح";
+$lang["transfer_fund_error_adding_updating"] = "خطأ في تحويل الأموال";
+
+$lang["accounts_amount_required"] = "يجب أن يكون المبلغ مطلوبا";
+$lang["accounts_amount_number"] = "يجب أن يكون المبلغ رقمًا";
+$lang["account_chart_of_accounts"] = "جدول الحسابات";
+$lang["account_create_head"] = "إنشاء رئيس";
+$lang["account_name"] = "اسم";
+$lang["account_nature"] = "طبيعة";
+$lang["account_head_id"] = "ID";
+$lang["account_header_name"] = "أسم الحساب:";
+$lang["account_nature_income"] = "الإيرادات";
+$lang["account_nature_expense"] = "مصروف";
+$lang["account_nature_assets"] = "الأصول";
+$lang["account_nature_libility"] = "Libility";
+$lang["account_nature_equity"] = "Equity";
+$lang["account_type_current"] = "Current";
+$lang["account_type_non_current"] = "Non Current";
+$lang["account_unknown"] = "غير معروف";
+$lang["head_successful_adding"] = "رئيس حساب إضافة ناجحة";
+$lang["head_successful_updating"] = "تم تحديث رئيس الحساب بنجاح";
+$lang["head_error_adding_updating"] = "خطأ في إنشاء حساب رئيس";

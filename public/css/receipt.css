@@ -1,0 +1,92 @@
+#receipt_wrapper
+{
+	width:100%;	
+}
+
+#receipt_header
+{
+	text-align:center;
+}
+
+#company_name
+{
+	font-size:150%;
+	font-weight:bold;
+}
+
+#company_name img
+{
+	max-width: 150px;
+	max-height: 150px;
+}
+
+#company_phone
+{
+	margin-bottom:15px;
+
+}
+
+#sale_time
+{
+	margin-bottom:5px;
+}
+
+#receipt_items
+{
+	position:relative;
+	border-collapse:collapse;
+	margin-top:15px;
+	margin-bottom:15px;
+	width:100%;
+}
+
+#receipt_items td
+{
+	position:relative;
+	padding:3px; margin-bottom:5px;
+	
+}
+
+#receipt_items tr
+{
+	margin-bottom:5px;	
+}
+
+#sale_return_policy
+{
+	width:80%;
+	margin:0 auto;
+	text-align:center;
+}
+
+#receipt_wrapper #barcode
+{
+	margin-top:10px;
+	text-align:center;
+	
+}
+
+.total-value 
+{
+	text-align: right;		
+}
+
+.discount
+{
+	font-weight: bold;
+}
+
+.receipt_wrapper .paper-cut:after {
+  content: " ";
+  display: block;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 36px;
+  background: -webkit-linear-gradient(#FFFFFF 0%, transparent 0%), -webkit-linear-gradient(135deg, #e9ebee 33.33%, transparent 33.33%) 0 0%, #e9ebee -webkit-linear-gradient(45deg, #e9ebee 33.33%, #FFFFFF 33.33%) 0 0%;
+  background: -o-linear-gradient(#FFFFFF 0%, transparent 0%), -o-linear-gradient(135deg, #e9ebee 33.33%, transparent 33.33%) 0 0%, #e9ebee -o-linear-gradient(45deg, #e9ebee 33.33%, #FFFFFF 33.33%) 0 0%;
+  background: -moz-linear-gradient(#FFFFFF 0%, transparent 0%), -moz-linear-gradient(135deg, #e9ebee 33.33%, transparent 33.33%) 0 0%, #e9ebee -moz-linear-gradient(45deg, #e9ebee 33.33%, #FFFFFF 33.33%) 0 0%;
+  background-repeat: repeat-x;
+  background-size: 0px 100%, 14px 27px, 14px 27px;
+}
