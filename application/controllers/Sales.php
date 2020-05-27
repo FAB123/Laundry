@@ -1993,164 +1993,6 @@ class Sales extends Secure_Controller
 		$this->Sale->create_temp_table($inputs);
 	}
 	
-	public function work_orders1()
-	{
-		$person_id = $this->session->userdata('person_id');
-
-		if(!$this->Employee->has_grant('reports_sales', $person_id))
-		{
-			redirect('no_access/sales/reports_sales');
-		}
-		else
-		{			
-			$definition_names = $this->Attribute->get_definitions_by_flags(Attribute::SHOW_IN_SALES);
-			//$inputs = array('start_date' => $start_date, 'end_date' => $end_date, 'sale_type' => $sale_type, 'location_id' => $location_id, 'definition_ids' => array_keys($definition_names));
-			$inputs = array('start_date' => '2010-01-01 00:00:00', 'end_date' => '2021-01-01 00:00:00', 'sale_type' => 'work_orders', 'location_id' => 'all', 'definition_ids' => array_keys($definition_names));
-			$this->create_temp($inputs);
-            $columns = get_workorders_manage_table_headers();
-			
-			$columns['details'] = array_merge($columns['details'], $definition_names);
-
-			$headers = $this->xss_clean($columns);
-
-			$report_data = $this->Sale->getWorkOrderData($inputs);
-
-			$summary_data = array();
-			$details_data = array();
-			$details_data_rewards = array();
-
-			$show_locations = $this->xss_clean($this->Stock_location->multiple_locations());
-			
-	     	foreach($report_data['summary'] as $key => $row)
-			{
-				if($row['sale_status'] == CANCELED)
-				{
-					$button_key = 'data-btn-restore';
-					$button_label = $this->lang->line('common_restore');
-				}
-				else
-				{
-					$button_key = 'data-btn-delete';
-					$button_label = $this->lang->line('common_delete');
-				}
-
-				$summary_data[] = $this->xss_clean(array(
-					'id' => $row['sale_id'],
-					'type_code' => $row['type_code'],
-					'sale_date' => date($this->config->item('dateformat'), strtotime($row['sale_date'])),
-					'quantity' => to_quantity_decimals($row['items_purchased']),
-					'employee_name' => $row['employee_name'],
-					'customer_name' => $row['customer_name'],
-					'subtotal' => to_currency($row['subtotal']),
-					'tax' => to_currency_tax($row['tax']),
-					'total' => to_currency($row['total']),
-					'cost' => to_currency($row['cost']),
-					'profit' => to_currency($row['profit']),
-					'payment_type' => $row['payment_type'],
-					'comment' => $row['comment'],
-					'edit' => anchor('sales/edit/'.$row['sale_id'], '<span class="glyphicon glyphicon-edit"></span>',
-						array('class' => 'modal-dlg print_hide', $button_key => $button_label, 'data-btn-submit' => $this->lang->line('common_submit'), 'title' => $this->lang->line('sales_update')))
-				));
-
-				foreach($report_data['details'][$key] as $drow)
-				{
-					$quantity_purchased = to_quantity_decimals($drow['quantity_purchased']);
-					if($show_locations)
-					{
-						$quantity_purchased .= ' [' . $this->Stock_location->get_location_name($drow['item_location']) . ']';
-					}
-
-					$attribute_values = (isset($drow['attribute_values'])) ? $drow['attribute_values'] : '';
-					$attribute_values = expand_attribute_values($definition_names, $attribute_values);
-
-					$details_data[$row['sale_id']][] = $this->xss_clean(array_merge(array(
-						$drow['name'],
-						$drow['category'],
-						$drow['serialnumber'],
-						$drow['description'],
-						$quantity_purchased,
-						to_currency($drow['subtotal']),
-						to_currency_tax($drow['tax']),
-						to_currency($drow['total']),
-						to_currency($drow['cost']),
-						to_currency($drow['profit']),
-						($drow['discount_type'] == PERCENT)? $drow['discount'].'%':to_currency($drow['discount'])), $attribute_values));
-
-				}
-
-				if(isset($report_data['rewards'][$key]))
-				{
-					foreach($report_data['rewards'][$key] as $drow)
-					{
-						$details_data_rewards[$row['sale_id']][] = $this->xss_clean(array($drow['used'], $drow['earned']));
-					}
-				}
-			}
-
-			$data = array(			
-				'headers' => $headers,
-				'summary_data' => $summary_data,
-				'details_data' => $details_data,
-				'details_data_rewards' => $details_data_rewards,
-				//'overall_summary_data' => $this->xss_clean($model->getSummaryData($inputs))
-			);
-		
-			$this->load->view('sales/manage_workorders', $data);
-		}
-	}	
-		
-	public function work_orders_search1()
-	{
-		$search = $this->input->get('search');
-		$limit = $this->input->get('limit');
-		$offset = $this->input->get('offset');
-		$sort = $this->input->get('sort');
-		$order = $this->input->get('order');
-
-		$filters2 = array('sale_type' => 'all',
-						 'location_id' => 'all',
-						 'start_date' => $this->input->get('start_date'),
-						 'end_date' => $this->input->get('end_date'),
-						 'only_cash' => FALSE,
-						 'only_due' => FALSE,
-						 'only_check' => FALSE,
-						 'only_invoices' => $this->config->item('invoice_enable') && $this->input->get('only_invoices'),
-						 'is_valid_receipt' => $this->Sale->is_valid_receipt($search));
-
-
-		$definition_names = $this->Attribute->get_definitions_by_flags(Attribute::SHOW_IN_SALES);
-
-		$filters = array('start_date' => $this->input->get('start_date'), 'end_date' => $this->input->get('end_date'), 'sale_type' => $sale_type, 'location_id' => $location_id, 'definition_ids' => array_keys($definition_names));
-
-		$this->load->model('reports/Detailed_sales');
-		$model = $this->Detailed_sales;
-
-		$model->create($inputs);
-
-		$columns = $model->getDataColumns();
-		$columns['details'] = array_merge($columns['details'], $definition_names);
-
-		$headers = $this->xss_clean($columns);
-
-		$report_data = $model->getData($inputs);
-
-		$summary_data = array();
-		$details_data = array();
-		$details_data_rewards = array();
-
-		$show_locations = $this->xss_clean($this->Stock_location->multiple_locations());
-
-		var_dump($filters);
-		//foreach($sales->result() as $sale)
-		{
-			$data_rows[] = $this->xss_clean(get_workorders_data_row($report_data));
-			
-		}
-
-		echo json_encode(array('total' => $total_rows, 'rows' => $data_rows));
-	}
-	
-	
 	public function work_orders()
 	{
 		$person_id = $this->session->userdata('person_id');
@@ -2210,88 +2052,82 @@ class Sales extends Secure_Controller
 			$data_rows[] = $this->xss_clean(get_sale_data_last_row($sales));
 		}
 		
-		
-		
-		
-		
 		$this->create_temp($filters);
 		
 		$report_data = $this->Sale->getWorkOrderData($filters);
 
-			$summary_data = array();
-			$details_data = array();
-			$details_data_rewards = array();
+		$summary_data = array();
+		$details_data = array();
+		$details_data_rewards = array();
 
-			$show_locations = $this->xss_clean($this->Stock_location->multiple_locations());
-			
-	     	foreach($report_data['summary'] as $key => $row)
+		$show_locations = $this->xss_clean($this->Stock_location->multiple_locations());
+		
+		foreach($report_data['summary'] as $key => $row)
+		{
+			if($row['sale_status'] == CANCELED)
 			{
-				if($row['sale_status'] == CANCELED)
+				$button_key = 'data-btn-restore';
+				$button_label = $this->lang->line('common_restore');
+			}
+			else
+			{
+				$button_key = 'data-btn-delete';
+				$button_label = $this->lang->line('common_delete');
+			}
+
+			$summary_data[] = $this->xss_clean(array(
+				'id' => $row['sale_id'],
+				'type_code' => $row['type_code'],
+				'sale_date' => date($this->config->item('dateformat'), strtotime($row['sale_date'])),
+				'quantity' => to_quantity_decimals($row['items_purchased']),
+				'employee_name' => $row['employee_name'],
+				'customer_name' => $row['customer_name'],
+				'subtotal' => to_currency($row['subtotal']),
+				'tax' => to_currency_tax($row['tax']),
+				'total' => to_currency($row['total']),
+				'cost' => to_currency($row['cost']),
+				'profit' => to_currency($row['profit']),
+				'payment_type' => $row['payment_type'],
+				'comment' => $row['comment'],
+				'edit' => anchor('sales/edit/'.$row['sale_id'], '<span class="glyphicon glyphicon-edit"></span>',
+					array('class' => 'modal-dlg print_hide', $button_key => $button_label, 'data-btn-submit' => $this->lang->line('common_submit'), 'title' => $this->lang->line('sales_update')))
+			));
+
+			foreach($report_data['details'][$key] as $drow)
+			{
+				$quantity_purchased = to_quantity_decimals($drow['quantity_purchased']);
+				if($show_locations)
 				{
-					$button_key = 'data-btn-restore';
-					$button_label = $this->lang->line('common_restore');
-				}
-				else
-				{
-					$button_key = 'data-btn-delete';
-					$button_label = $this->lang->line('common_delete');
-				}
-
-				$summary_data[] = $this->xss_clean(array(
-					'id' => $row['sale_id'],
-					'type_code' => $row['type_code'],
-					'sale_date' => date($this->config->item('dateformat'), strtotime($row['sale_date'])),
-					'quantity' => to_quantity_decimals($row['items_purchased']),
-					'employee_name' => $row['employee_name'],
-					'customer_name' => $row['customer_name'],
-					'subtotal' => to_currency($row['subtotal']),
-					'tax' => to_currency_tax($row['tax']),
-					'total' => to_currency($row['total']),
-					'cost' => to_currency($row['cost']),
-					'profit' => to_currency($row['profit']),
-					'payment_type' => $row['payment_type'],
-					'comment' => $row['comment'],
-					'edit' => anchor('sales/edit/'.$row['sale_id'], '<span class="glyphicon glyphicon-edit"></span>',
-						array('class' => 'modal-dlg print_hide', $button_key => $button_label, 'data-btn-submit' => $this->lang->line('common_submit'), 'title' => $this->lang->line('sales_update')))
-				));
-
-				foreach($report_data['details'][$key] as $drow)
-				{
-					$quantity_purchased = to_quantity_decimals($drow['quantity_purchased']);
-					if($show_locations)
-					{
-						$quantity_purchased .= ' [' . $this->Stock_location->get_location_name($drow['item_location']) . ']';
-					}
-
-					$attribute_values = (isset($drow['attribute_values'])) ? $drow['attribute_values'] : '';
-					$attribute_values = expand_attribute_values($definition_names, $attribute_values);
-
-					$details_data[$row['sale_id']][] = $this->xss_clean(array_merge(array(
-						$drow['name'],
-						$drow['category'],
-						$drow['serialnumber'],
-						$drow['description'],
-						$quantity_purchased,
-						to_currency($drow['subtotal']),
-						to_currency_tax($drow['tax']),
-						to_currency($drow['total']),
-						to_currency($drow['cost']),
-						to_currency($drow['profit']),
-						($drow['discount_type'] == PERCENT)? $drow['discount'].'%':to_currency($drow['discount'])), $attribute_values));
-
+					$quantity_purchased .= ' [' . $this->Stock_location->get_location_name($drow['item_location']) . ']';
 				}
 
-				if(isset($report_data['rewards'][$key]))
+				$attribute_values = (isset($drow['attribute_values'])) ? $drow['attribute_values'] : '';
+				$attribute_values = expand_attribute_values($definition_names, $attribute_values);
+
+				$details_data[$row['sale_id']][] = $this->xss_clean(array_merge(array(
+					$drow['name'],
+					$drow['category'],
+					$drow['serialnumber'],
+					$drow['description'],
+					$quantity_purchased,
+					to_currency($drow['subtotal']),
+					to_currency_tax($drow['tax']),
+					to_currency($drow['total']),
+					to_currency($drow['cost']),
+					to_currency($drow['profit']),
+					($drow['discount_type'] == PERCENT)? $drow['discount'].'%':to_currency($drow['discount'])), $attribute_values));
+
+			}
+
+			if(isset($report_data['rewards'][$key]))
+			{
+				foreach($report_data['rewards'][$key] as $drow)
 				{
-					foreach($report_data['rewards'][$key] as $drow)
-					{
-						$details_data_rewards[$row['sale_id']][] = $this->xss_clean(array($drow['used'], $drow['earned']));
-					}
+					$details_data_rewards[$row['sale_id']][] = $this->xss_clean(array($drow['used'], $drow['earned']));
 				}
 			}
+		}
 		
-		
-
 		echo json_encode(array('total' => $total_rows, 'rows' => $summary_data, 'details_data' => $details_data));
 	}
 

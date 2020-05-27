@@ -24,12 +24,12 @@ $(document).ready(function()
 		uniqueId: 'sale_id',
 		detailView: true,
 		onLoadSuccess: function(response) {
-			if($("#table tbody tr").length > 1) {
+			if($("#table tbody tr").length > 0) {
 				details_data = response.details_data;
 			}
 		},
 		onExpandRow: function (index, row, $detail) {
-			alert(details_data);
+  
 			$detail.html('<table></table>').find("table").bootstrapTable({
 				columns: <?php echo transform_headers_readonly($headers['details']); ?>,
 				data: details_data[(!isNaN(row.id) && row.id) || $(row[0] || row.id).text().replace(/(POS|RECV)\s*/g, '')]

@@ -9,7 +9,7 @@ function getCost(elmnt,line) {
 }
 </script>
     <div class="row">
-	    <div class="col-12 col-md-12">
+	    <div class="col-md-12">
 			<?php
 			if(isset($error))
 			{
@@ -123,28 +123,26 @@ function getCost(elmnt,line) {
 						</ul>
 					</div>
 					<?php echo form_close(); ?>
-
-					<div class="col-md-3 pos_category">
-				    	<div class="sales_category">
-							<div class="form-group scrollbar scrollbar-primary">
+									
+	    			<div class="panel-body form-group">
+						<div class="sales_category">
+							<div class="panel-body form-group">
 								<div class="sales_category__panel">
 									<div class="sales_category__panel--toggle-button" id="get_list_cat">				
 									</div>
 								</div>
 
-								<div class="sales__category--wrapper list-of-categories">
+								<div class="sales__category--wrapper list-of-categories" style="display: block">
 								</div>		
 							</div>
 						</div>
-					</div>
-					
-					<div class="col-md-9 pos_items">
-					<div class="sales_category">
+
+						<div class="sales_category">
 							<div class="sales_category_image panel-body form-group list-of-items" style="display: none">
 							</div>
 						</div>
-				
 				    </div>
+					
 				</div>
 				
 				<div class="tab-pane  <?php echo ($cart_tab == 'pay_tab') ? 'fade in active' : ''; ?>" id="payment_cart">
@@ -1201,8 +1199,8 @@ function check_payment_type()
 					    }else{
 					    	var iconSrc="no-img.png";
 					    }
-    					result += '<a class="btn btn-app btn_item btn_cat item_btn_img select_item" style="background-image:url(\'<?php echo base_url("uploads/item_pics/"); ?>'+iconSrc+'\');" rel='+item.value+'><span class="item_btn_label">'+item.label+'</span></a>';				
-						//result +=item.label+"</a>";	
+    					result += '<a class="btn btn-app table_cat select_item" rel='+item.value+'><div style="background-image:url(\'<?php echo base_url("uploads/item_pics/"); ?>'+iconSrc+'\'); background-size: 80px 80px; height: 80px;width: 80px;"></div><div class="centered">Centered</div><br>';				
+						result +=item.label+"</a>";	
 				});
 				$(".list-of-items").show();
 				$(".list-of-items").html(result);
@@ -1223,7 +1221,7 @@ function check_payment_type()
 					var data  = jQuery.parseJSON(r);
 					$.each(data,function(i,v){
 						if(v.category)
-						result +="<a class='sales__category--item btn_cat btn ' rel='"+v.category+"'  href='#'>"+v.category+"</a>";
+						result +="<a class='sales__category--item btn btn-lg cat_button' rel='"+v.category+"'  href='#'>"+v.category+"</a>";
 					});
 	
 					$(".list-of-categories").show();

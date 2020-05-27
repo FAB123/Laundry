@@ -273,28 +273,22 @@ input#amount_tendered:disabled
 	box-shadow: -1px -3px 3px rgba(0,0,0,.3)
 }
 
-.cat_button {
-    height: 70px !important;
-    width: 100px;
-    white-space: normal;
-	font-family: monospace;
-    overflow: hidden;
-    font-weight: 800;
-	font-size: 14px;
-	color: #0303e6;	
-    border-width: 1px;
-    border-color: #D2B48C;
-    border-style: solid;
-    border-radius: 6px;
-	box-shadow: -1px -3px 3px rgba(0,0,0,.3)
-}
-
 .sales_category .sales__category--wrapper {
     width:  100%;
+    /*
     overflow: auto;
+    
     white-space: nowrap;
-}
 
+    '''
+        white-space: normal;
+    height: 39em;
+    overflow-y: scroll;
+    */
+    overflow-y: scroll;
+    height: 39em;
+    white-space: normal;
+}
 
 #cart_tab_selection {
     padding: 0;
@@ -417,3 +411,81 @@ input#amount_tendered:disabled
     border-radius: 6px;
 }
 
+.pos_category {
+    height: 40em;
+    border-top: 3px solid #47b2e4;
+    border-bottom: 3px solid #47b2e4;
+    border-left: 3px solid #47b2e4;
+    /*
+    border-radius: 15px;
+    */
+    padding-right: 0;
+    padding-left: 1rem;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+	background: #fff;
+    box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.pos_items{
+    height: 40em;
+    border: 3px solid #47b2e4;
+    border-radius: 15px;
+	background: #fff;
+	box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.cat_button {
+    height: 70px !important;
+    width: 100px;
+    white-space: normal;
+	font-family: monospace;
+    overflow: hidden;
+    font-weight: 800;
+	font-size: 14px;
+	color: #0303e6;	
+    border-width: 1px;
+    border-color: #D2B48C;
+    border-style: solid;
+    border-radius: 6px;
+	box-shadow: -1px -3px 3px rgba(0,0,0,.3)
+}
+
+.btn_cat {
+    height: 7em;
+    width: 7em;
+    margin: 4px;
+    border-radius: 15px;
+    text-align: center !important;
+    border: 3px solid #f03069 !important;
+    display:inline-flex;/*CSS3*/
+    align-items:center;/*Vertical align*/
+    justify-content:center;/*horizontal align*/
+}
+.item_btn_img{
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 1;
+    padding-top: 50%;
+}
+.btn_item
+{
+    padding: 0rem;
+	font-family: monospace;
+    overflow: hidden;
+    font-weight: 700;
+	font-size: 1em;
+    box-shadow: -1px -3px 3px rgba(0,0,0,.3);
+    border-radius: 15px;
+}
+.item_btn_label{
+    color: crimson !important;
+    display:table; /* Enable line-wrapping in IE8+ */
+    white-space:normal;
+}
