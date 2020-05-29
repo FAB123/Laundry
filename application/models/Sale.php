@@ -665,6 +665,16 @@ class Sale extends CI_Model
 
 			$this->db->insert('sales_items', $sales_items_data);
 			$coster+=($cur_item_info->cost_price*$item['quantity']);
+			
+			if($sale_type == SALE_TYPE_WORK_ORDER)
+			{
+				$work_order_data = array(
+					'sale_id' => $sale_id,
+					'item_id' => $item['item_id'],
+					'job_type' => $this->Item->get_category_name($item['item_id'])
+			    );
+				$this->db->insert('laundary_basic', $work_order_data);
+			}
 
 			if($cur_item_info->stock_type == HAS_STOCK && $sale_status == COMPLETED)
 			{

@@ -128,9 +128,10 @@
 $host= gethostname();
 $ip = gethostbyname($host);     
 ?>
+<!--
  <body class="app sidebar-mini sidenav-toggled rtl"> 
- <!-- <body class="app sidebar-mini sidenav-toggled rtl"> 
- <body class="app sidebar-mini sidebar-collapse rtl"> -->
+  <body class="app sidebar-mini sidenav-toggled rtl"> -->
+ <body class="app sidebar-mini sidebar-collapse rtl"> 
   <div class="se-pre-con"></div>
   
   

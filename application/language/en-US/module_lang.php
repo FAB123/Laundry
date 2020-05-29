@@ -42,3 +42,5 @@ $lang["module_accounts"] = "Accounts";
 $lang["module_accounts_desc"] = "Add, Update, Delete, and Search Accounts.";
 $lang["module_service"] = "Services";
 $lang["module_service_desc"] = "Add, Update, Delete, and Search Service.";
+$lang["module_services"] = "Services";
+$lang["module_services_desc"] = "Add, Update, Delete, and Search Service.";

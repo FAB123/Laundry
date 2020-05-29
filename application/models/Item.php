@@ -1038,7 +1038,7 @@ class Item extends CI_Model
 		return $item_name;
 	}
 	
-		public function get_all_category($stock_location_id = -1, $rows = 0, $limit_from = 0)
+	public function get_all_category($stock_location_id = -1, $rows = 0, $limit_from = 0)
 	{
 		$this->db->from('items');
 
@@ -1054,6 +1054,22 @@ class Item extends CI_Model
 		}
 
 		return $this->db->get();
+	}
+	
+	public function get_category_name($items_id)
+	{
+		$this->db->from('items');
+		$this->db->where('item_id', $items_id);
+		$this->db->where('deleted', '0');
+
+		$query = $this->db->get();
+
+		if($query->num_rows() == 1)
+		{
+			return $query->row()->category;
+		}
+
+		return FALSE;
 	}
 	
 	public function get_all_category_item($category, $stock_location_id = -1, $rows = 0, $limit_from = 0)

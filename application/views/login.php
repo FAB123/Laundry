@@ -19,6 +19,7 @@
         <h1>SalesTime</h1>
       </div>
       <div class="login-box">
+		<?php echo $this->Item->get_category_name($item['item_id']); ?>
 		<?php echo form_open('login', array('class' =>'login-form')) ?>
           <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
           <div class="form-group">

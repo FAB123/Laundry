@@ -1054,9 +1054,6 @@ function get_workorders_manage_table_headers()
 Get the html data row for the sales
 */
 
-
-
-
 function get_workorders_data_row($report_data)
 {
 	$CI =& get_instance();
@@ -1129,5 +1126,136 @@ function get_workorders_data_row($report_data)
 	}
 	
 	return array('summary_data' => $summary_data, 'details_data' => $details_data, 'details_data_rewards' => $details_data_rewards);
+}
+
+function get_services_manage_table_headers()
+{
+	$CI =& get_instance();
+
+	//if($CI->Employee->is_driver($CI->session->userdata('person_id')))
+	if(1==2)
+	{
+		$headers = array(
+		array('order_id' => $CI->lang->line('services_order_ids')),
+		array('location' => $CI->lang->line('receivings_location')),
+		array('shelf' => $CI->lang->line('services_shelf')),
+		array('status' => $CI->lang->line('services_status')),
+		array('start_date' => $CI->lang->line('services_start_date')),
+		array('due_date' => $CI->lang->line('services_due_date'))
+	    );	
+		
+    	if($CI->Employee->has_grant('messages', $CI->session->userdata('person_id')))
+     	{
+     		$headers[] = array('messages' => '');
+    		$headers[] = array('whatsapp' => '');
+    	}
+	}
+	else
+	{
+		$headers = array(
+	        array('service_id' => $CI->lang->line('services_rec_id')),
+	    	array('order_id' => $CI->lang->line('services_order_ids')),
+    		array('receiving_time' => $CI->lang->line('receiving_time')),
+			array('location' => $CI->lang->line('receivings_location')),
+		    array('first_name' => $CI->lang->line('services_customer_name')),
+		    array('phone_number' => $CI->lang->line('common_phone_number')),
+		    array('priority' => $CI->lang->line('services_priority')),
+		    array('shelf' => $CI->lang->line('services_shelf')),
+		    array('status' => $CI->lang->line('services_status')),
+		    array('work_type' => $CI->lang->line('services_work_type')),
+		    array('start_date' => $CI->lang->line('services_start_date')),
+		    array('due_date' => $CI->lang->line('services_due_date')),
+			array('engineer_id' => $CI->lang->line('engineers_supplier'))
+     	);	
+
+        if($CI->Employee->has_grant('services_transfer', $CI->session->userdata('person_id')))
+	    {
+		    $headers[] = array('transfer' => '');
+	    }
+	
+	    if($CI->Employee->has_grant('services_report', $CI->session->userdata('person_id')))
+	    {
+		    $headers[] = array('data' => '');
+	    }
+
+    	if($CI->Employee->has_grant('messages', $CI->session->userdata('person_id')))
+     	{
+     		$headers[] = array('messages' => '');
+    		$headers[] = array('whatsapp' => '');
+    	}
+		
+	}
+	return transform_headers($headers);
+}
+
+
+/*
+Get the html data row for the service
+*/
+function get_services_data_row($service)
+{
+	$CI =& get_instance();
+	$controller_name = strtolower(get_class($CI));
+	
+	//if($CI->Employee->is_driver($CI->session->userdata('person_id')))
+	if(1==2)
+	{
+    	return array (
+	        'service_id' => 'Recv '. $service->service_id,
+    		'order_id' => $CI->Service->get_proirity_color($service->order_id, $service->priority),
+		    'receiving_time' => date($CI->config->item('dateformat') . ' ' . $CI->config->item('timeformat'), strtotime($service->receiving_time)),
+    		'location' => (empty($service->latitude)) ? anchor($controller_name."/show_map/$service->order_id", '<span class="glyphicon"> '.$service->customer_location.'</span>',
+    			array('class'=>"modal-dlg btn-sm btn-warning", 'data-btn-submit' => $CI->lang->line('common_ok'), 'title'=>$CI->lang->line('services_customer_detailes'))) : anchor($controller_name."/show_map/$service->order_id", '<span class="glyphicon glyphicon-map-marker"> '.$service->customer_location.'</span>',
+    			array('class'=>"modal-dlg btn-sm btn-success", 'data-btn-submit' => $CI->lang->line('common_ok'), 'data-btn-drive' => $CI->lang->line('services_drive'), 'title'=>$CI->lang->line('common_delivery_position'))),
+    		'first_name' => empty($service->company_name) ? $service->first_name .' '. $service->last_name :$service->first_name .' '. $service->last_name .' ['.$service->company_name.']' ,
+    		'phone_number' => $CI->config->item('calling_codes').''.$service->phone_number,
+    		'shelf' => $CI->Shelf->shelf_name($service->shelf),
+     		'status' => ($service->status != 4) ? $CI->Service->get_status_name($service->status) : anchor($controller_name."/reprint/$service->order_id", '<span>'.$CI->Service->get_status_name($service->status).'</span>'),
+			'start_date' => date($CI->config->item('dateformat') . ' ' . $CI->config->item('timeformat'), strtotime($service->start_date)),
+			'due_date' => date($CI->config->item('dateformat') . ' ' . $CI->config->item('timeformat'), strtotime($service->due_date)),
+    		'engineer_id' => $service->en_first_name .' '. $service->en_last_name,
+    		'transfer' => (empty($service->engineer_id)) ? '' : anchor($controller_name."/transfer/$service->order_id", '<span class="glyphicon glyphicon-retweet"></span>',
+    			array('class'=>"modal-dlg btn-sm btn-success", 'data-btn-submit' => $CI->lang->line('common_submit'), 'title'=>$CI->lang->line($controller_name.'_transfer_form'))),
+    		'messages' => empty($service->phone_number) ? '' : anchor("Messages/view/$service->person_id", '<span class="glyphicon glyphicon-phone"></span>',
+    			array('class'=>"modal-dlg btn-sm btn-info", 'data-btn-submit' => $CI->lang->line('common_submit'), 'title'=>$CI->lang->line('messages_sms_send'))),
+    		'whatsapp' => (empty($service->phone_number)) ? '' : anchor($controller_name."/whatsapp_send/$service->phone_number/$service->first_name/$service->order_id", '<span class="glyphicon glyphicon-comment"></span>',
+    			array('class'=>"modal-dlg btn-sm btn-warning", 'title'=>$CI->lang->line($controller_name.'_whatsapp_send'))),
+    		'edit' => (($CI->Service->admin_actions($service->delivery, $service->status) == 0) || (!$service->shelf)) ? '' : anchor($controller_name."/view/$service->order_id", '<span class="glyphicon glyphicon-edit">'.$CI->lang->line('services_actions').'</span>',
+    			array('class'=>"modal-dlg btn-sm btn-warning", 'data-btn-submit' => $CI->lang->line('services_ok'), 'title'=>$CI->lang->line($controller_name.'_update'))),
+    		'data' => anchor($controller_name."/report/$service->order_id", '<span class="glyphicon glyphicon glyphicon-list-alt"></span>',
+    			array('class'=>"modal-dlg modal-dlg-wide  btn-sm btn-warning", 'data-btn-submit' => $CI->lang->line('common_submit'), 'title'=>$CI->lang->line($controller_name.'_history')))
+     	); 
+	}
+	else
+	{
+		return array (
+	    'service_id' => 'Recv '. $service->service_id,
+		'order_id' => $service->order_id,
+		'receiving_time' => date($CI->config->item('dateformat') . ' ' . $CI->config->item('timeformat'), strtotime($service->receiving_time)),
+		//'location' => $service->location,
+		'location' => (empty($service->latitude)) ? $service->customer_location : anchor($controller_name."/show_map/$service->order_id", '<span class="glyphicon glyphicon-map-marker"> '.$service->customer_location.'</span>',
+			array('class'=>"modal-dlg btn-sm btn-success", 'data-btn-submit' => $CI->lang->line('common_ok'), 'data-btn-drive' => $CI->lang->line('services_drive'), 'title'=>$CI->lang->line('common_delivery_position'))),
+		'first_name' => empty($service->company_name) ? $service->first_name .' '. $service->last_name :$service->first_name .' '. $service->last_name .' ['.$service->company_name.']' ,
+		'phone_number' => $CI->config->item('calling_codes').''.$service->phone_number,
+		'priority' => $service->priority,
+		'shelf' => (empty($service->shelf) && $service->delivery == '0') ? anchor($controller_name."/change_shelf/$service->order_id", '<span class="glyphicon glyphicon-tasks"></span>',
+			array('class'=>"modal-dlg", 'data-btn-submit' => $CI->lang->line('common_submit'), 'title'=>$CI->lang->line('shelfs_change_shelf'))) : $CI->Shelf->shelf_name($service->shelf),
+		'status' => ($service->status != 4) ? $CI->Service->get_status_name($service->status) : anchor($controller_name."/reprint/$service->order_id", '<span>'.$CI->Service->get_status_name($service->status).'</span>'),
+		'work_type' => $CI->Service->get_work_type($service->work_type),
+		'start_date' => date($CI->config->item('dateformat') . ' ' . $CI->config->item('timeformat'), strtotime($service->start_date)),
+		'due_date' => date($CI->config->item('dateformat') . ' ' . $CI->config->item('timeformat'), strtotime($service->due_date)),
+		'engineer_id' => $service->en_first_name .' '. $service->en_last_name,
+		'transfer' => (empty($service->engineer_id)) ? '' : anchor($controller_name."/transfer/$service->order_id", '<span class="glyphicon glyphicon-retweet"></span>',
+			array('class'=>"modal-dlg btn-sm btn-success", 'data-btn-submit' => $CI->lang->line('common_submit'), 'title'=>$CI->lang->line($controller_name.'_transfer_form'))),
+		'messages' => empty($service->phone_number) ? '' : anchor("Messages/view/$service->person_id", '<span class="glyphicon glyphicon-phone"></span>',
+			array('class'=>"modal-dlg btn-sm btn-info", 'data-btn-submit' => $CI->lang->line('common_submit'), 'title'=>$CI->lang->line('messages_sms_send'))),
+		'whatsapp' => (empty($service->phone_number)) ? '' : anchor($controller_name."/whatsapp_send/$service->phone_number/$service->first_name/$service->order_id", '<span class="glyphicon glyphicon-comment"></span>',
+			array('class'=>"modal-dlg btn-sm btn-warning", 'title'=>$CI->lang->line($controller_name.'_whatsapp_send'))),
+		'edit' => (($CI->Service->driver_actions($service->delivery, $service->status) == 0) || (!$service->shelf)) ? '' : anchor($controller_name."/view/$service->order_id", '<span class="glyphicon glyphicon-edit">'.$CI->lang->line('services_actions').'</span>',
+			array('class'=>"modal-dlg btn-sm btn-warning", 'data-btn-submit' => $CI->lang->line('services_ok'), 'title'=>$CI->lang->line($controller_name.'_update'))),
+		'data' => anchor($controller_name."/report/$service->order_id", '<span class="glyphicon glyphicon glyphicon-list-alt"></span>',
+			array('class'=>"modal-dlg modal-dlg-wide  btn-sm btn-warning", 'data-btn-submit' => $CI->lang->line('common_submit'), 'title'=>$CI->lang->line($controller_name.'_history')))
+    	);		
+	}
 }
 ?>

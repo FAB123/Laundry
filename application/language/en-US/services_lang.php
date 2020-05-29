@@ -1,0 +1,137 @@
+<?php 
+$lang["services_company"] = "Company";
+$lang["services_customer_name"] = "Customer Name";
+$lang["services_model"] = "Model";
+$lang["services_serial"] = "Serial";
+$lang["services_defect"] = "Defect";
+$lang["receivings_comments"] = "Comments";
+$lang["services_priority"] = "Priority";
+$lang["services_shelf"] = "Container";
+$lang["services_status"] = "Status";
+
+
+
+$lang["status_customer_respond"] = "Waiting for Customer Respond";
+$lang["status_fixing"] = "Fixing";
+$lang["status_completed"] = "Completed";
+$lang["status_delivery"] = "Delivered";
+$lang["status_return"] = "Return";
+$lang["status_dumped"] = "Dumped";
+$lang["status_job_finished"] = "Job Finish";
+$lang["services_no_services_to_display"] = "No Service to Display";
+$lang["services_service_id"] = "Id";
+$lang["services_order_id"] = "Order ID";
+$lang["services_rec_id"] = "Rec ID";
+$lang["services_transfer_to"] = "Transfer To";
+$lang["service_remark"] = "Remarks";
+$lang["service_spare"] = "Additional Spare List";
+$lang["service_est"] = "Est Amount";
+$lang["services_action"] = "Action :";
+$lang["print_after_receivings"] = "Print After Receivings";
+$lang["sms_after_receivings"] = "SMS After Receivings";
+$lang["status_all"] = "All";
+$lang["status_processing1"] = "Pick For Service";
+$lang["status_customer_respond1"] = "Wait For Customer Approvel";
+$lang["status_approved"] = "Customer Approved";
+$lang["status_eng_rejected"] = "Engineer Rejected";
+$lang["status_cust_rejected"] = "Customer Rejected";
+$lang["status_reject"] = "Rejected";
+$lang["status_onl_approved"] = "Online Approved";
+$lang["status_onl_rejected"] = "Online Rejected";
+$lang["status_fixed"] = "Fixed";
+$lang["services_current_status"] = "Current Status";
+$lang["services_pending"] = "Pending";
+$lang["services_deliverd"] = "Deliverd";
+$lang["services_transaction"] = "Time";
+
+$lang["service_fixing"] = "Est Amount";
+$lang["services_completed"] = "Action :";
+$lang["service_normal"] = "Normal Speed";
+$lang["service_fast"] = "Fast Service";
+$lang["services_ultra_fast"] = "Ultra Fast";
+$lang["services_error_adding_updating"] = "Service update or add failed.";
+$lang["services_successful_updating"] = "You have successfully updated Service";
+$lang["service_feedback"] = "Feedback";
+$lang["service_despatch"] = "Despatch";
+$lang["service_description"] = "Description";
+$lang["services_update"] = "Master Control";
+
+$lang["status_yes"] = "Yes";
+$lang["status_no"] = "No";
+$lang["status_include"] = "Additional";
+$lang["services_summary"] = "Summary";
+$lang["services_details"] = "Detailed Transactions";
+$lang["services_history"] = "Service History";
+$lang["suppliers_cannot_be_deleted"] = "Could not delete selected Supplier(s). One or more have Sales.";
+$lang["services_whatsapp_send"] = "Send WhatsApp Message";
+$lang["services_whatsapp_send_a_message"] = "Send A Message";
+$lang["services_whatsapp_confirm"] = "Take Customer Confirmation";
+$lang["services_whatsapp_completed"] = "Ready to Delivery";
+$lang["services_whatsapp_Rejected"] = "Engineer Rejected";
+$lang["desk_not_delivered"] = "Not Deliverd yet";
+$lang["services_no_items_in_cart"] = "No items in cart";
+$lang["services_order_ids"] = "Order ID";
+$lang["services_generate_barcodes"] = "Genterate Barcode";
+$lang["status_assign_job"] = "Assign New Job";
+$lang["status_assigned_job"] = "New Job Assigned";
+$lang["service_payment"] = "Payment";
+$lang["status_me"] = "ME";
+$lang["service_varify_otp"] = "Varify with OTP";
+$lang["service_send_otp"] = "Send OTP";
+$lang["service_despatch_date"] = "Despatch Date";
+$lang["service_otp_verified"] = "OTP Verified";
+$lang["services_delivery_details"] = "Delivery Details";
+$lang["services_used_spare_details"] = "Used Spare Details";
+
+$lang["status_do_you_want_assign"] = "Do You Want assign job to ";
+$lang["status_do_you_want_pick"] = "Do You Want to pick Job?";
+$lang["status_do_you_want_delivery"] = "Do You Want to Delivery Container?";
+$lang["status_do_you_want_return"] = "Do You Want to return Container";
+$lang["status_do_you_want_dump"] = "Do You Want to Dump Container";
+$lang["status_do_from_desk"] = "Please Compleet Task From Desk Module!!";
+$lang["status_job_finished"] = "Job Finished";
+$lang["status_job_error"] = "Job Error !!";
+$lang["services_ok"] = "OK";
+$lang["status_booked"] = "Booked";
+$lang["status_work_assigned"] = "Work Assigned";
+$lang["status_picked"] = "Picked for Delivery";
+$lang["status_delivered"] = "Container Delivered";
+$lang["status_returned"] = "Container Returned";
+$lang["service_job_done"] = "Job Done";
+$lang["services_receipt"] = "Receipt";
+$lang["services_due_date"] = "Due Date";
+$lang["services_amount"] = "Amount";
+$lang["services_back"] = "Back";
+$lang["services_generate_arabic_bill"] = "Arabic bill";
+
+$lang["services_canceled"] = "Canceled";
+$lang["service_job_status"] = "Job Status";
+$lang["service_job_normal"] = "Normal";
+$lang["transfer_successful_updating"] = "Transfer Driver successfully Completed";
+$lang["transfer_error_adding_updating"] = "Error Transfering Driver";
+$lang["services_engineer"] = "Driver";
+$lang["services_transfer_form"] = "Transfer Driver";
+$lang["services_current_eng"] = "Current Driver";
+$lang["services_type"] = "Service Type";
+$lang["services_work_type"] = "Work Type";
+$lang["services_trash"] = "Trash";
+$lang["services_rubble"] = "Rubble";
+
+$lang["services_drive"] = "Drive";
+$lang["services_customer_address"] = "Address";
+$lang["services_actions"] = "Action";
+$lang["services_start_date"] = "Start Date";
+$lang["receiving_time"] = "Receiving Date";
+$lang["status_container_dumped"] = "Container Dumped";
+$lang["services_customer_detailes"] = "Customer Detailes";
+$lang["services_payment_type"] = "Payment Type";
+$lang["online_job_done"] = "Job Done";
+$lang["online_rejected"] = "Job Canceled";
+
+
+
+$lang["common_cash_ar"] = "نقد";
+$lang["common_debit_ar"] = "بطاقة الائتمان";
+$lang["common_check_ar"] = "شيك";
+$lang["common_credit_ar"] = "ائتمان";
+$lang["common_delivery_time_ar"] = "الدفع عند الاستلام";
